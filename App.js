@@ -1,32 +1,65 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-//-------------------------JSX----------------------------
 const Title = () => (
+  <a href="/">
   <h1 id="title" key="h2">
-    Namaste React
+    <img src="https://yt3.googleusercontent.com/ytc/AL5GRJXudT76175T4x4n7eslWM1YkgNLHDSSqfXGoadl=s900-c-k-c0x00ffffff-no-rj" alt="logo" id="logo" className="logo"/>
   </h1>
+  </a>
 )
-
-
-//----------------React Component-----------------------
-const HeaderComponent = () => {
+const Header = () => {
   return (
-    <div>
+    <div className="header">
       <Title/>
-      <div className="header" id="header">
-       <img alt="logo" id="logo" src="./assets/logo.svg"/>
-       <img alt="searchBar" id="search" src="./assets/search.png"/>
-       <img alt="User" id="user" src="/assets/user.svg"/>
-      </div>
+       <div className="nav-items">
+            <ul>
+              <li>Home</li>
+              <li>About Us</li>
+              <li>Contact</li>
+              <li>Cart</li>
+            </ul>
+       </div>
     </div>
   )
 }
-const HeaderComponent2 = () => (
-  <div>
-    <h1>NR fuunctional headerComponent2.....</h1>
-    <h2>Heading 2......</h2>
-  </div>
-)
+
+
+
+
+
+
+
+
+
+
+
+const AppLayout = () =>{
+  {
+    /*
+    *Header
+      -Logo
+      -Nav Items(right side)
+      -Cart
+    *Body
+      -SearchBar
+      -RestroList
+        -Restroinfo Card
+          -Image
+          -Name
+          -Rating
+          -Cusine
+    *Fotter
+      -Links
+      -Copyright
+      -Some Items
+     */
+  }
+  return <HeaderComponent/>
+}
+
+
+
+
 
 
 
