@@ -17,7 +17,7 @@ export const Title = () => (
 
 
 const Header = () => {
-  const [isLoggedIn ,setisLoggedIn] = useState(false);
+  const [isLoggedIn, setisLoggedIn] = useState(false);
   return (
     <div className="header">
       <Title />
@@ -32,8 +32,8 @@ const Header = () => {
       {
         // js expression can be written & statement cannot be written
         isLoggedIn ?
-          <button onClick={()=> setisLoggedIn(false)}>Logout</button>
-          : <button  onClick={()=> setisLoggedIn(true)}>Login</button>
+          <button onClick={() => setisLoggedIn(false)}>Logout</button>
+          : <button onClick={() => setisLoggedIn(true)}>Login</button>
       }
     </div>
   )

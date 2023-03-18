@@ -11,9 +11,9 @@ function filterData(InputTxt, restaurants) {
 }
 
 const Body = () => {
-  const [searchTxt, setSearchTxt] = useState("");
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
-  const [allRestaurants, setAllRestaurants] = useState("")
+  const [allRestaurants, setAllRestaurants] = useState([])
+  const [searchTxt, setSearchTxt] = useState("");
   //Empty dependency array => will be called once after render
   //dep arry is [searchText] => will be called once after render and everytime after searchText changes
   useEffect(() => {
@@ -38,8 +38,9 @@ const Body = () => {
 
   if (!allRestaurants) return null;
 
-  if(filteredRestaurants?.length == 0) return <h1>No restaurant match your filter!!</h1>
-  return (allRestaurants?.length == 0) ? (<Shimmer />) : (
+  // if(filteredRestaurants?.length == 0) return <h1>No restaurant match your filter!!</h1>
+
+  return (allRestaurants?.length == 0) ? (<Shimmer/>) : (
     <>
       <div className="search-container">
         <input
