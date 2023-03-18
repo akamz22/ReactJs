@@ -1,5 +1,11 @@
 import React from 'react'
-import  ReactDOM  from 'react'
+import ReactDOM from 'react'
+import { useState } from 'react';
+const loggedInUser = () => {
+  //API call to check auth
+  return true;
+}
+
 export const Title = () => (
   <a href="/">
     <h1 id="title" key="h2">
@@ -7,7 +13,11 @@ export const Title = () => (
     </h1>
   </a>
 )
+
+
+
 const Header = () => {
+  const [isLoggedIn ,setisLoggedIn] = useState(false);
   return (
     <div className="header">
       <Title />
@@ -19,6 +29,12 @@ const Header = () => {
           <li>Cart</li>
         </ul>
       </div>
+      {
+        // js expression can be written & statement cannot be written
+        isLoggedIn ?
+          <button onClick={()=> setisLoggedIn(false)}>Logout</button>
+          : <button  onClick={()=> setisLoggedIn(true)}>Login</button>
+      }
     </div>
   )
 }
