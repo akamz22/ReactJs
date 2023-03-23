@@ -1,17 +1,21 @@
 import React from 'react'
 import ReactDOM from 'react'
+import Logo from '../assets/img/foodvilla.webp'
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 const loggedInUser = () => {
   //API call to check auth
   return true;
 }
 
+//SPA - Single Page Application
+
 export const Title = () => (
-  <a href="/">
+  <Link href="/">
     <h1 id="title" key="h2">
-      <img src="https://yt3.googleusercontent.com/ytc/AL5GRJXudT76175T4x4n7eslWM1YkgNLHDSSqfXGoadl=s900-c-k-c0x00ffffff-no-rj" alt="logo" id="logo" className="logo" />
+      <img src={Logo} alt="logo" id="logo" className="logo" />
     </h1>
-  </a>
+  </Link>
 )
 
 
@@ -23,10 +27,18 @@ const Header = () => {
       <Title />
       <div className="nav-items">
         <ul>
-          <li>Home</li>
-          <li>About Us</li>
-          <li>Contact</li>
-          <li>Cart</li>
+          <Link to='/'>
+            <li>Home</li>
+          </Link>
+          <Link to='/about'>
+            <li>About Us</li>
+          </Link>
+          <Link to='/contact'>
+            <li>Contact</li>
+          </Link>
+          <Link to='/cart'>
+            <li>Cart</li>
+          </Link>
         </ul>
       </div>
       {

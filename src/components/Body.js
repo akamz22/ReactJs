@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Shimmer from "./Shimmer";
 import { restaurantList } from "../config";
 import RestrauntCard from "./RestaurantCard";
+import { Link } from "react-router-dom";
 //what is state
 //what is hook 
 //what is useState
@@ -24,11 +25,11 @@ const Body = () => {
   async function getRestaurants() {
     const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9351929&lng=77.62448069999999&page_type=DESKTOP_WEB_LISTING");
     const json = await data.json();
-    console.log(json);
+    // console.log(json);
     setAllRestaurants(json?.data?.cards[2]?.data?.data?.cards);
     setFilteredRestaurants(json?.data?.cards[2]?.data?.data?.cards);
   }
-  
+
   // Conditional Rendering 
   // if(restaurants =="")=>shimmer Ui
   // else data ui 
@@ -40,7 +41,7 @@ const Body = () => {
 
   // if(filteredRestaurants?.length == 0) return <h1>No restaurant match your filter!!</h1>
 
-  return (allRestaurants?.length == 0) ? (<Shimmer/>) : (
+  return (allRestaurants?.length == 0) ? (<Shimmer />) : (
     <>
       <div className="search-container">
         <input
@@ -62,7 +63,13 @@ const Body = () => {
       <div className="restaurant-list">
         {
           filteredRestaurants.map((restaurant) => {
-            return <RestrauntCard {...restaurant.data} key={restaurant.id} />
+            return (
+
+              <Link to={'/restaurant/' + restaurant.data.id}
+                key={restaurant.data.id}>
+                <RestrauntCard {...restaurant.data} key={restaurant.id} />
+              </Link>
+            )
           })
         }
       </div>
