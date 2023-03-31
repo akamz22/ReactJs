@@ -9,7 +9,7 @@ import RestaurantMenu from "./components/RestaurantMenu";
 import About from "./components/About";
 import Cart from "./components/Cart";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
-
+import Profile from "./components/Profile";
 const AppLayout = () => {
   return (
     <>
@@ -33,7 +33,13 @@ const appRouter = createBrowserRouter(
         },
         {
           path: '/about',
-          element: <About />
+          element: <About />,
+          children: [
+            {
+              path: 'profile',
+              element: <Profile />
+            },
+          ],
         },
         {
           path: '/contact',
@@ -43,8 +49,8 @@ const appRouter = createBrowserRouter(
           element: <Cart />
         },
         {
-          path:'/restaurant/:resId',
-          element: <RestaurantMenu/>
+          path: '/restaurant/:resId',
+          element: <RestaurantMenu />
         }
       ],
     }

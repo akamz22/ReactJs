@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from 'react-router-dom'
-import { IMG_CDN_URL , MENU_CDN_URL} from "../config";
+import { IMG_CDN_URL, MENU_CDN_URL } from "../config";
 import Shimmer from './Shimmer'
 const RestaurantMenu = () => {
     const { resId } = useParams();
@@ -16,8 +16,9 @@ const RestaurantMenu = () => {
 
         const data = await fetch(MENU_CDN_URL + resId + "&submitAction=ENTER");
         const json = await data.json();
-        console.log(json);
+        // console.log(json);
         setRestaurant(json.data)
+        // console.log(useState());
         // console.log(restaurant);
     }
 
@@ -40,7 +41,16 @@ const RestaurantMenu = () => {
                     <h1>Menu</h1>
                     <ul>
                         {restaurant?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card?.card?.itemCards.map((menu) => (
-                            <li key={menu?.card?.info?.id}>{menu?.card?.info?.name} -  {menu?.card?.info?.price/100}</li>
+                            <div>
+                                <li key={menu?.card?.info?.id}>
+                                    <b>{menu?.card?.info?.name}  -  {menu?.card?.info?.price / 100}</b>
+                                    {/* {console.log(menu?.card?.info)} */}
+                                </li>
+                                <img height={100} width={80} src={IMG_CDN_URL + menu?.card?.info?.imageId} />
+                                <button>Add</button>
+
+                            </div>
+
                         ))}
                     </ul>
                 </div>

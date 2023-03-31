@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 //what is useState
 function filterData(InputTxt, restaurants) {
   const filteredData = restaurants.filter((allRestaurants) => allRestaurants?.data?.name?.toLowerCase().includes(InputTxt.toLowerCase()));
-  return filteredData
+  return filteredData;
 }
 
 const Body = () => {
@@ -33,7 +33,7 @@ const Body = () => {
   // Conditional Rendering 
   // if(restaurants =="")=>shimmer Ui
   // else data ui 
-  console.log("Render");
+  // console.log("Render");
 
 
 
@@ -55,7 +55,8 @@ const Body = () => {
           }
         />
         <button onClick={() => {
-          const data = filterData(searchTxt, allRestaurants); setFilteredRestaurants(data)
+          const data = filterData(searchTxt, allRestaurants); 
+          setFilteredRestaurants(data)
         }}>Search</button>
         {/* <h1>{searchClicked}</h1> */}
 
