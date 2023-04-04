@@ -1,7 +1,11 @@
 import React, { useEffect } from "react"
 import { useState } from "react";
 const Profile = ({ name }) => {
-    const [count, setCount] = useState(0);
+    // const [count, setCount] = useState(0);
+    const arr = useState(0);
+    const count = arr[0];
+    const setCount = arr[1];
+    console.log(arr);
     useEffect(() => {
         //API CALL
         // console.log("useEffect");
@@ -18,8 +22,12 @@ const Profile = ({ name }) => {
         <div>
             <h1> Profile Functional Component </h1>
             <h2>Name : {name}</h2>
-            <h2>Count : {count}</h2>
-            <button onClick={() => setCount(count + 1)}>Click Me</button>
+            <div>
+            <button onClick={() => setCount(count + 1)}><h4>-</h4></button>
+            <span> {count} </span>
+            <button onClick={() => setCount(count - 1)}><h4>+</h4></button>
+
+            </div>
         </div>
     )
 }

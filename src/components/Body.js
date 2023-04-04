@@ -2,15 +2,12 @@ import React, { useState, useEffect } from "react";
 import Shimmer from "./Shimmer";
 import { restaurantList } from "../config";
 import RestrauntCard from "./RestaurantCard";
+import { filterData } from "../utils/Helper";
 import { Link } from "react-router-dom";
+import useOnline from "../utils/useOnline";
 //what is state
 //what is hook 
 //what is useState
-function filterData(InputTxt, restaurants) {
-  const filteredData = restaurants.filter((allRestaurants) => allRestaurants?.data?.name?.toLowerCase().includes(InputTxt.toLowerCase()));
-  return filteredData;
-}
-
 const Body = () => {
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
   const [allRestaurants, setAllRestaurants] = useState([])
@@ -24,7 +21,7 @@ const Body = () => {
 
   async function getRestaurants() {
     const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9351929&lng=77.62448069999999&page_type=DESKTOP_WEB_LISTING");
-    const json = await data.json();
+    const json = await data?.json();
     // console.log(json);
     setAllRestaurants(json?.data?.cards[2]?.data?.data?.cards);
     setFilteredRestaurants(json?.data?.cards[2]?.data?.data?.cards);
@@ -35,7 +32,10 @@ const Body = () => {
   // else data ui 
   // console.log("Render");
 
-
+ const isOnline = useOnline();
+ if(!isOnline){
+  return <h1>🔴Offline, Please Check your internet connection!!</h1>
+ }
 
   if (!allRestaurants) return null;
 
@@ -54,7 +54,9 @@ const Body = () => {
           }
           }
         />
-        <button onClick={() => {
+        <button 
+          className="search-btn"
+          onClick={() => {
           const data = filterData(searchTxt, allRestaurants); 
           setFilteredRestaurants(data)
         }}>Search</button>

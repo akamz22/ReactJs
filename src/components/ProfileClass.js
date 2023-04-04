@@ -13,20 +13,20 @@ class Profile extends Component {
         // console.log("Child - constructor " + this.props.name);
     }
 
-    componentDidMount() {
+    async componentDidMount() {
 
-        //Best place to call api 
+        // Best place to call api 
         // this.timer = setInterval(() => {
         //     console.log("Namaste React Op");
         // }, 1000);
 
         // console.log("Child - ComponentDidMount " + this.props?.name);
-        // const data = await fetch('https://api.github.com/users/akamz22');
-        // const json = await data.json();
-        // console.log(json);
-        // this.setState({
-        //     userInfo:json,
-        // });
+        const data = await fetch('https://api.github.com/users/akamz22');
+        const json = await data.json();
+        console.log(json);
+        this.setState({
+            userInfo:json,
+        });
     }
     componentDidUpdate(prevProps, prevState) {
 
@@ -54,6 +54,7 @@ class Profile extends Component {
                 <img src={"https://avatars.githubusercontent.com/u/81897979?v=4"} />
                 <h2>Name : {this.state?.userInfo?.name}</h2>
                 <h2>Location : {this.state?.userInfo?.location}</h2>
+              
             </div>
         )
     }

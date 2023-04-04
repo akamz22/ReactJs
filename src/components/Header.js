@@ -3,6 +3,7 @@ import ReactDOM from 'react'
 import Logo from '../assets/img/foodvilla.webp'
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import useOnline from '../utils/useOnline';
 const loggedInUser = () => {
   //API call to check auth
   return true;
@@ -22,6 +23,9 @@ export const Title = () => (
 
 const Header = () => {
   const [isLoggedIn, setisLoggedIn] = useState(false);
+  const isOnline = useOnline();
+  // const isLoggedIn = useAuth();
+  // const [getLocalVariables,setLocalVariables]  = useLocalStorage();
   return (
     <div className="header">
       <Title />
@@ -39,8 +43,12 @@ const Header = () => {
           <Link to='/cart'>
             <li>Cart</li>
           </Link>
+          <Link to='/instamart'>
+            <li>Instamart</li>
+          </Link>
         </ul>
       </div>
+      <h1>{isOnline ? "✅" : "🔴"}</h1>
       {
         // js expression can be written & statement cannot be written
         isLoggedIn ?

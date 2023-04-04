@@ -1,4 +1,4 @@
-import React from "react";
+import React, { lazy } from "react";
 import ReactDOM from "react-dom/client";
 import Header from "./components/Header";
 import Body from "./components/Body";
@@ -8,8 +8,19 @@ import Contact from "./components/Contact";
 import RestaurantMenu from "./components/RestaurantMenu";
 import About from "./components/About";
 import Cart from "./components/Cart";
+import { Suspense } from "react";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import Profile from "./components/Profile";
+import Shimmer from "./components/Shimmer";
+//Chunking
+//Code Spliting
+//Dynamic Bundling
+//LazyLoading
+//OnDemandLoading
+//Dymnamic Import
+
+const Instamart = lazy(() => import('./components/Instamart'))
+//upon on demand loading --> upon render react will suspend loading
 const AppLayout = () => {
   return (
     <>
@@ -51,6 +62,13 @@ const appRouter = createBrowserRouter(
         {
           path: '/restaurant/:resId',
           element: <RestaurantMenu />
+        },
+        {
+          path: '/instamart',
+          element: (
+            <Suspense fallback={<Shimmer/>}>
+              <Instamart />
+            </Suspense>),
         }
       ],
     }
