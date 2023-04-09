@@ -6,9 +6,10 @@ import { filterData } from "../utils/Helper";
 import { Link } from "react-router-dom";
 import useOnline from "../utils/useOnline";
 //what is state
+//what are props
 //what is hook 
 //what is useState
-const Body = () => {
+const Body = ({user}) => {
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
   const [allRestaurants, setAllRestaurants] = useState([])
   const [searchTxt, setSearchTxt] = useState("");
@@ -32,10 +33,10 @@ const Body = () => {
   // else data ui 
   // console.log("Render");
 
- const isOnline = useOnline();
- if(!isOnline){
-  return <h1>🔴Offline, Please Check your internet connection!!</h1>
- }
+  const isOnline = useOnline();
+  if (!isOnline) {
+    return <h1>🔴Offline, Please Check your internet connection!!</h1>
+  }
 
   if (!allRestaurants) return null;
 
@@ -43,8 +44,9 @@ const Body = () => {
 
   return (allRestaurants?.length == 0) ? (<Shimmer />) : (
     <>
-      <div className="search-container">
+      <div className="flex items-center w-[700px] m-4 ml-[400px]">
         <input
+          className="text-sm rounded-lg w-[700px] block p-4 bg-gray-100 focus:bg-white focus:outline-dashed"
           type="text"
           placeholder="Search..."
           value={searchTxt}
@@ -54,23 +56,23 @@ const Body = () => {
           }
           }
         />
-        <button 
-          className="search-btn"
+        <button
+          className="px-16 mx-8 mt-2 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm  py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
           onClick={() => {
-          const data = filterData(searchTxt, allRestaurants); 
-          setFilteredRestaurants(data)
-        }}>Search</button>
+            const data = filterData(searchTxt, allRestaurants);
+            setFilteredRestaurants(data)
+          }}>Search</button>
         {/* <h1>{searchClicked}</h1> */}
 
       </div>
-      <div className="restaurant-list">
+      <div className="flex flex-wrap ml-60 w-[70%] items-center justify-center">
         {
           filteredRestaurants.map((restaurant) => {
             return (
 
-              <Link to={'/restaurant/' + restaurant.data.id}
+              <Link className="" to={'/restaurant/' + restaurant.data.id}
                 key={restaurant.data.id}>
-                <RestrauntCard {...restaurant.data} key={restaurant.id} />
+                <RestrauntCard {...restaurant.data} key={restaurant.id} Name={user.Name}/>
               </Link>
             )
           })

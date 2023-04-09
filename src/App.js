@@ -1,5 +1,7 @@
 import React, { lazy } from "react";
 import ReactDOM from "react-dom/client";
+import { Suspense } from "react";
+import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import Header from "./components/Header";
 import Body from "./components/Body";
 import Footer from "./components/Footer";
@@ -8,8 +10,6 @@ import Contact from "./components/Contact";
 import RestaurantMenu from "./components/RestaurantMenu";
 import About from "./components/About";
 import Cart from "./components/Cart";
-import { Suspense } from "react";
-import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import Profile from "./components/Profile";
 import Shimmer from "./components/Shimmer";
 //Chunking
@@ -40,7 +40,10 @@ const appRouter = createBrowserRouter(
       children: [
         {
           path: '/',
-          element: <Body />
+          element: <Body user={{
+            Name: "Namaste dev",
+            Email: "support@namastedev.com"
+          }} />
         },
         {
           path: '/about',
@@ -66,7 +69,7 @@ const appRouter = createBrowserRouter(
         {
           path: '/instamart',
           element: (
-            <Suspense fallback={<Shimmer/>}>
+            <Suspense fallback={<Shimmer />}>
               <Instamart />
             </Suspense>),
         }
