@@ -1,4 +1,4 @@
-import React, { lazy } from "react";
+import React, { lazy, useContext, useEffect, useState } from "react";
 import ReactDOM from "react-dom/client";
 import { Suspense } from "react";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
@@ -12,6 +12,9 @@ import About from "./components/About";
 import Cart from "./components/Cart";
 import Profile from "./components/Profile";
 import Shimmer from "./components/Shimmer";
+import userContext from "./utils/userContext";
+import { Provider } from "react-redux";
+import store from "./utils/store";
 //Chunking
 //Code Spliting
 //Dynamic Bundling
@@ -22,12 +25,22 @@ import Shimmer from "./components/Shimmer";
 const Instamart = lazy(() => import('./components/Instamart'))
 //upon on demand loading --> upon render react will suspend loading
 const AppLayout = () => {
+  const [user, setUser] = useState({
+    name: "Ashwini Kumar",
+    email: "example@gmail.com",
+  })
   return (
-    <>
-      <Header />
-      <Outlet />
-      <Footer />
-    </>
+    <Provider store={store}>
+      <userContext.Provider value={{
+        user: user,
+        setUser: setUser
+      }}>
+        <Header />
+        <Outlet />
+        <Footer />
+      </userContext.Provider>
+    </Provider>
+
   )
 }
 
@@ -58,7 +71,8 @@ const appRouter = createBrowserRouter(
         {
           path: '/contact',
           element: <Contact />
-        }, {
+        }, 
+        {
           path: '/cart',
           element: <Cart />
         },

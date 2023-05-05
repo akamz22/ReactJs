@@ -1,15 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Shimmer from "./Shimmer";
 import { restaurantList } from "../config";
 import RestrauntCard from "./RestaurantCard";
 import { filterData } from "../utils/Helper";
 import { Link } from "react-router-dom";
 import useOnline from "../utils/useOnline";
+import userContext from "../utils/userContext";
 //what is state
 //what are props
 //what is hook 
 //what is useState
-const Body = ({user}) => {
+const Body = () => {
+  const { user, setUser } = useContext(userContext)
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
   const [allRestaurants, setAllRestaurants] = useState([])
   const [searchTxt, setSearchTxt] = useState("");
@@ -57,13 +59,32 @@ const Body = ({user}) => {
           }
         />
         <button
-          className="px-16 mx-8 mt-2 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm  py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+          className="px-16 mx-8 mt-2 text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm  py-2.5 mr-2 mb-2"
           onClick={() => {
             const data = filterData(searchTxt, allRestaurants);
             setFilteredRestaurants(data)
           }}>Search</button>
         {/* <h1>{searchClicked}</h1> */}
-
+        <input
+          className="bg-slate-100 h-9 ml-8 pl-4"
+          value={user.name}
+          onChange={e => {
+            setUser({
+              ...user,
+              name: e.target.value,
+            })
+          }}>
+        </input>
+        <input
+          className="bg-slate-100 h-9 ml-8 pl-4"
+          value={user.email}
+          onChange={e => {
+            setUser({
+              ...user,
+              email: e.target.value,
+            })
+          }}>
+        </input>
       </div>
       <div className="flex flex-wrap ml-60 w-[70%] items-center justify-center">
         {
@@ -72,7 +93,7 @@ const Body = ({user}) => {
 
               <Link className="" to={'/restaurant/' + restaurant.data.id}
                 key={restaurant.data.id}>
-                <RestrauntCard {...restaurant.data} key={restaurant.id} Name={user.Name}/>
+                <RestrauntCard {...restaurant.data} key={restaurant.id} Name={user.Name} />
               </Link>
             )
           })

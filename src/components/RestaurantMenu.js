@@ -3,9 +3,18 @@ import { useParams } from 'react-router-dom'
 import { IMG_CDN_URL } from "../config";
 import Shimmer from './Shimmer'
 import useRestaurant from "../utils/useRestaurant";
+import { addItem } from "../utils/CartSlice";
+import { useDispatch } from "react-redux";
+
 const RestaurantMenu = () => {
     const { resId } = useParams();
     const restaurant = useRestaurant(resId);
+
+    const dispatch = useDispatch();
+    const addFoodItem = (item) =>{
+        dispatch(addItem(item)) 
+    }
+
     return (!restaurant) ? <Shimmer /> :
         (
             <div className="relative">
@@ -22,7 +31,7 @@ const RestaurantMenu = () => {
 
                 </div>
                 <div className="flex items-center">
-                    <h1 className="text-4xl font-bold ml-[700px]">Menu</h1>
+                    <h1 className="text-4xl font-bold pl-[700px] w-full items-center border-b-[2px] pb-3">Menu</h1>
                 </div>
                 <div className="">
                     <ul className="justify-center items-center order-1 grid flex-wrap">
@@ -34,7 +43,7 @@ const RestaurantMenu = () => {
                                 </li>
                                 <div className="flex">
                                     <img className="ml-60 h-20 w-20" src={IMG_CDN_URL + menu?.card?.info?.imageId} />
-                                    <button className="ml-[252px] mt-[65px] px-3 absolute border-solid border-2 rounded-md border-gray-300 bg-white font-bold duration-500 hover:shadow-lg text-emerald-500 hover:scale-110 ">Add</button>
+                                    <button onClick={() => addFoodItem(menu.card.info)} className="ml-[252px] mt-[65px] px-3 absolute border-solid border-2 rounded-md border-gray-300 bg-white font-bold duration-500 hover:shadow-lg text-emerald-500 hover:scale-110 ">Add</button>
                                 </div>
                             </div>
                         ))}
