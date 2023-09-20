@@ -23,14 +23,9 @@ const useRestaurantData = () => {
         setAllRestaurants(RESTAURANT_DATA?.restaurants)
         setFilteredRestaurants(RESTAURANT_DATA?.restaurants)
         setItemCarousel(ITEM_CAROUSEL?.card?.card?.imageGridCards?.info)
-        // console.log(ITEM_CAROUSEL.card?.card?.imageGridCards.info);
         setRestaurantCarousel(RESTAURANT_CAROUSEL?.card?.card?.gridElements?.infoWithStyle?.restaurants)
       }
       else{
-      // console.log(json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
-    // console.log(json?.data?.cards[1]?.card?.card?.imageGridCards.info);
-    // console.log(json?.data?.cards[0]?.card?.card?.imageGridCards)
-    // console.log(json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
       setCarousel(json?.data?.cards[0]?.card?.card?.imageGridCards)
       setItemCarousel(json?.data?.cards[1]?.card?.card?.imageGridCards?.info);
       setRestaurantCarousel(json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants);

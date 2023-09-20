@@ -3,9 +3,8 @@ import React from 'react'
 const Shimmer = () => {
   return (
     <>
-
-      <div >
-        <p className='my-[10px]  mr-[30rem] ml-[30rem] h-12 animate-pulse bg-gray-200'>
+      <div className='rounded-md'>
+        <p className='my-[10px] rounded-md  mr-[30rem] ml-[30rem] h-12 animate-pulse bg-gray-200'>
         </p>
       </div>
       <div className='flex w-[70%] flex-wrap items-center justify-center ml-64'>

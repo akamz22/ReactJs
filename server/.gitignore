@@ -2,3 +2,4 @@
 .parcel-cache
 .babelrc
 dist
+.env
