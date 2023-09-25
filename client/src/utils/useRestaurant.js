@@ -11,10 +11,10 @@ const useRestaurant = (resId) => {
         try {
             const data = await fetch(MENU_FETCH_URL + resId + "&submitAction=ENTER");
             const json = await data.json();
-            console.log("API Menu Data  : ",json.data);
+            // console.log("API Menu Data  : ",json.data);
             setRestaurant(json.data);
         } catch (e) {
-            console.log("Dummy Menu Data  : ", dummydata[0].data);
+            // console.log("Dummy Menu Data  : ", dummydata[0].data);
             setRestaurant(dummydata[0].data);
         }
     }

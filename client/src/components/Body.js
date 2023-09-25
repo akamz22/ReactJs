@@ -1,18 +1,18 @@
 import React, { useState, useEffect, useContext } from "react";
 import Shimmer from "./Shimmer";
 import { restaurantList } from "../config";
-import RestrauntCard from "./RestaurantCard";
+import ButtonList from "./ButtonList";
+import RestaurantCard from "./RestaurantCard";
 import { Link } from "react-router-dom";
+import ItemCarousel from "./ItemCarousel";
+import FoodCarousel from "./FoodCarousel";
+import RestaurantCarousel from "./RestaurantCarousel";
 import useOnline from "../utils/useOnline";
 import userContext from "../utils/userContext";
 import useRestaurantData from "../utils/useRestaurantData";
 
 const Body = () => {
-  const { user, setUser } = useContext(userContext)
-  // const [filteredRestaurants, setFilteredRestaurants] = useState(restaurantList);
-  // const [allRestaurants, setAllRestaurants] = useState(restaurantList)
   const [searchTxt, setSearchTxt] = useState("");
-
   const [page, setPage] = useState(10)
   const { carousel, allRestaurants, filteredRestaurants, setFilteredRestaurants, setAllRestaurants, restaurantCarousel, itemCarousel } = useRestaurantData();
 
@@ -28,15 +28,6 @@ const Body = () => {
     // console.log("Filterdtata : ",filteredData);
     setFilteredRestaurants(filteredData);
   }
-  // function filterData(searchText, allRestaurants) {
-  //   const filterData = allRestaurants.filter((restaurant) =>
-  //     restaurant?.info?.name?.toLowerCase()?.includes(searchText.toLowerCase())
-  //   );
-  //   setSearchTxt(e.target.value);
-  //   console.log(filterData);
-  //   return filterData;
-  // }
-
 
 
   async function getRestaurantMore() {
@@ -83,6 +74,7 @@ const Body = () => {
     }
   }
 
+
   useEffect(() => {
     if (page > 2) {
       getRestaurantMore();
@@ -117,7 +109,44 @@ const Body = () => {
 
   return (allRestaurants?.length == 0) ? (<Shimmer />) : (
     <>
-      <div className="max-w-full m-4">
+      {/* <div className="max-w-full m-4">
+        <div className="flex justify-center md:ml-8 sm-ml-8">
+          <input
+            className="text-sm rounded-lg block px-4 w-96 h-10 sm-w-40  bg-gray-100 focus:bg-white focus:outline-gray-300"
+            type="text"
+            placeholder="Search Restaurants..."
+            value={searchTxt}
+
+            onChange={
+              filterData
+            }
+          />
+        </div>
+      </div> */}
+      <div className='mx-8 sm:mx-14 md:mx-24 lg:mx-44 pb-4'>
+        {
+          <FoodCarousel data={carousel} />
+        }
+      </div>
+
+      <div className='mx-8 sm:mx-14 md:mx-24 lg:mx-44 pb-4'>
+        <ItemCarousel data={itemCarousel} />
+      </div>
+
+      <hr className="mx-8 sm:mx-14 md:mx-24 lg:mx-44 border-1 border-solid border-gray-300 my-8" />
+
+
+      <div className='mx-8 sm:mx-14 md:mx-24 lg:mx-40 p-4'>
+        <RestaurantCarousel data={restaurantCarousel} />
+      </div>
+
+      <hr className="mx-8 sm:mx-14 md:mx-24 lg:mx-44 border-1 border-solid border-gray-300 my-8" />
+      <div className="flex flex-wrap items-center justify-center lg:mx-60">
+        <h1 className='font-bold text-2xl pb-4 sm:ml-5'>Restaurants with online food delivery</h1>
+        <div>
+          <ButtonList />
+        </div>
+        <div className="max-w-full m-4">
         <div className="flex justify-center md:ml-8 sm-ml-8">
           <input
             className="text-sm rounded-lg block px-4 w-96 h-10 sm-w-40  bg-gray-100 focus:bg-white focus:outline-gray-300"
@@ -131,18 +160,20 @@ const Body = () => {
           />
         </div>
       </div>
-      <div className="flex flex-wrap items-center justify-center lg:mx-60">
-        {
-          filteredRestaurants.map((restaurant) => {
+        <div className="grid grid-cols-1 mx-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 items-start gap-8 mt-8" data-testid='res-list'>
+          {/* You have to write logic for NO restraunt fount here */}
+          {filteredRestaurants && filteredRestaurants.map((restaurant) => {
             return (
-
-              <Link className="" to={'/restaurant/' + restaurant.info.id}
-                key={restaurant.info.id}>
-                <RestrauntCard {...restaurant.info} key={restaurant.info.id} Name={user.Name} />
+              <Link
+                to={"/restaurant/" + restaurant.info.id}
+                key={restaurant.info.id}
+                className='pr-4'
+              >
+                <RestaurantCard {...restaurant.info} />
               </Link>
-            )
-          })
-        }
+            );
+          })}
+        </div>
       </div>
     </>
   )

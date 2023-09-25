@@ -23,7 +23,7 @@ class Profile extends Component {
         // console.log("Child - ComponentDidMount " + this.props?.name);
         const data = await fetch('https://api.github.com/users/akamz22');
         const json = await data.json();
-        console.log(json);
+        // console.log(json);
         this.setState({
             userInfo:json,
         });
@@ -40,7 +40,7 @@ class Profile extends Component {
         } {
             //code--------------------------------
         }
-        console.log("Child - componentDidUpdate");
+        // console.log("Child - componentDidUpdate");
     }
     componentWillUnmount() {
         clearInterval(this.timer);

@@ -1,18 +1,37 @@
-import React,{useContext} from "react"
-import { Link } from "react-router-dom";
-import { IMG_CDN_URL } from "../config"
-import userContext from "../utils/userContext";
-const RestrauntCard = ({ name, cuisines, cloudinaryImageId, deliveryTime ,Name}) => {
-  const {user} = useContext(userContext)
+import React from 'react'
+import { IMG_CDN_URL } from '../config'
+
+const RestaurantCard = ({
+  name,
+  avgRating,
+  cuisines,
+  cloudinaryImageId,
+  areaName,
+  aggregatedDiscountInfoV3
+}) => {
+  const discountHeader = aggregatedDiscountInfoV3?.header;
+  const discountSubHeader = aggregatedDiscountInfoV3?.subHeader;
+  const shouldRenderDiscount = discountHeader && discountSubHeader;
+
   return (
-    <div className="lg:w-[232px] p-2 m-2 shadow-md h-[350px] hover:shadow-2xl transition duration-500 transform hover:scale-105 cursor-pointer w-[300px]">
-      <img className="h-40 lg:w-[230px] w-[300px]" src={`${IMG_CDN_URL}${cloudinaryImageId}`} />
-      <h2 className="font-bold text-xl">{name}</h2>
-      <h3>{cuisines.join(', ')}</h3>
-      <h4>{deliveryTime} Minutes ETA</h4>
-      {/* <h4>{user.name} - {user.email}</h4> */}
-      {/* <h4>{Name}</h4> */}
+    <div className='transition-transform transform hover:scale-95'>
+      <div className='relative overflow-hidden rounded-lg'>
+        <img className='rounded-2xl object-cover w-full h-full' src={IMG_CDN_URL + cloudinaryImageId} alt="food-image" />
+        <div className='absolute inset-0 bg-gradient-to-t from-black via-transparent to transparent '></div>
+        {shouldRenderDiscount && (
+          <h3 className='absolute bottom-1 left-3 font-bold text-white text-xl line-clamp-1'>
+            {discountHeader} {discountSubHeader}
+          </h3>
+        )}
+      </div>
+      <div className='ml-3 mt-3'>
+        <h2 className='font-semibold text-xl line-clamp-1'>{name}</h2>
+        <h2 className='font-semibold text-l'>⭐ {avgRating}</h2>
+        <h3 className='line-clamp-1'>{cuisines.join(", ")}</h3>
+        <h4>{areaName}</h4>
+      </div>
     </div>
   )
 }
-export default RestrauntCard;
+
+export default RestaurantCard

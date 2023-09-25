@@ -3,7 +3,6 @@ import ReactDOM from "react-dom/client";
 import { Suspense } from "react";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import Header from "./components/Header";
-import Checkout from "./components/Checkout";
 import Body from "./components/Body";
 import Footer from "./components/Footer";
 import Error from "./components/Error";
@@ -16,6 +15,7 @@ import Shimmer from "./components/Shimmer";
 import userContext from "./utils/userContext";
 import { Provider } from "react-redux";
 import store from "./utils/store";
+import MainRestaurantList from "./components/Offers";
 //Chunking
 //Code Spliting
 //Dynamic Bundling
@@ -78,12 +78,12 @@ const appRouter = createBrowserRouter(
           element: <Cart />
         },
         {
-          path: '/restaurant/:resId',
-          element: <RestaurantMenu />
+          path: '/offers',
+          element: <MainRestaurantList />
         },
         {
-          path: '/cart/checkout',
-          element: <Checkout />
+          path: '/restaurant/:resId',
+          element: <RestaurantMenu />
         },
         {
           path: '/instamart',
