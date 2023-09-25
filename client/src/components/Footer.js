@@ -1,6 +1,6 @@
 import React,{useContext} from 'react'
 import userContext from '../utils/userContext';
-import foodvilla from '../assets/img/foodvilla.png'
+import foodvilla from '../assets/img/zwigato.png'
 const Footer = () => {
   const {user} = useContext(userContext)
   return (
@@ -10,9 +10,9 @@ const Footer = () => {
         <div
           className="container flex flex-col flex-wrap px-5 py-32 mx-auto md:items-center lg:items-start md:flex-row md:flex-no-wrap">
           <div className="flex-shrink-0 w-64 mx-auto text-center md:mx-0 md:text-left">
-          <img className='ml-20 lg:ml-2' alt='logo' src={foodvilla}/>
-            <p className="mt-2 text-sm text-gray-500">Good Food , Good Life</p>
-            <div className="mt-4">
+          <img className='ml-0 lg:ml-0' alt='logo' src={foodvilla}/>
+            <p className="mt-2 text-sm lg:ml-16 text-gray-500">Good Food , Good Life</p>
+            <div className="mt-4 lg:ml-16">
               <span className="inline-flex justify-center mt-2 sm:ml-auto sm:mt-0 sm:justify-start">
                 <a className="text-gray-500 cursor-pointer hover:text-gray-700">
                   <svg fill="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"

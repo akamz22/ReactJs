@@ -80,7 +80,10 @@ const Body = () => {
       getRestaurantMore();
     }
   }, [page]);
-
+  const handleLoadMoreClick = () => {
+    // Increment the page state to load more restaurants
+    setPage((prevPage) => prevPage + 1);
+  };
 
   const handelInfiniteScroll = async () => {
     try {
@@ -174,6 +177,14 @@ const Body = () => {
             );
           })}
         </div>
+      </div>
+      <div className="flex justify-center my-4">
+        <button
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          onClick={handleLoadMoreClick}
+        >
+          Load More
+        </button>
       </div>
     </>
   )

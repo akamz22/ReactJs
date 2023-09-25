@@ -95,6 +95,10 @@ const Cart = () => {
                     </tr>
                   ))}
                   <tr className="font-semibold">
+                    <td className="px-4 py-2" colSpan="2">Discount:</td>
+                    <td className="px-4 py-2">Rs. 0.00</td>
+                  </tr>
+                  <tr className="font-semibold">
                     <td className="px-4 py-2" colSpan="2">Subtotal:</td>
                     <td className="px-4 py-2">Rs. {total.toFixed(2)}</td>
                   </tr>

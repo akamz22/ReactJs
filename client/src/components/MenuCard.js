@@ -50,7 +50,7 @@ const MenuCard = ({ ItemDetails }) => {
                                 <div className='flex justify-between items-center'>
                                     <button
                                         data-testid="removeBtn"
-                                        className="text-[#60b246] cursor-pointer px-4"
+                                        className="text-[#60b246] cursor-pointer px-4 text-xl"
                                         onClick={() => {
                                             removeFoodItem(ItemDetails);
                                             decreamentCount(id); // Call decreamentCount when removing an item
@@ -58,10 +58,10 @@ const MenuCard = ({ ItemDetails }) => {
                                     >
                                         -
                                     </button>
-                                    <span>{count[id]}</span> {/* Display count[id] */}
+                                    <span className='text-[#60b246] text-xl'>{count[id]}</span> {/* Display count[id] */}
                                     <button
                                         data-testid="addBtn"
-                                        className="text-[#60b246] cursor-pointer px-4"
+                                        className="text-[#60b246] cursor-pointer px-4 text-xl"
                                         onClick={() => {
                                             addFoodItem(ItemDetails);
                                             increamentCount(id); // Call increamentCount when adding an item

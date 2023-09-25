@@ -2,10 +2,12 @@ import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import logo from '../assets/img/foodlogo.png';
+import zwigato from '../assets/img/zwigato.png';
 import { auth, provider } from '../config'
 import { signInWithPopup } from 'firebase/auth'
 const Header = () => {
   const [toggleMenu, setToggleMenu] = useState(false);
+  const [error, setError] = useState(null);
   const cartItems = useSelector((store) => store.cart.items)
   const handleToggle = () => {
     setToggleMenu(!toggleMenu)
@@ -23,6 +25,15 @@ const Header = () => {
       setValue(data.user.email)
       localStorage.setItem("email", data.user.email)
     })
+      .catch((error) => {
+        if (error.code === 'auth/popup-closed-by-user') {
+          // Handle the popup-closed-by-user error
+          setError('Please complete the authentication process. Do not close the popup.');
+        } else {
+          // Handle other Firebase authentication errors
+          setError(error.message);
+        }
+      });
   }
   useEffect(() => {
     setValue(localStorage.getItem("email"))
@@ -32,10 +43,10 @@ const Header = () => {
 
   return (
     <div className='w-full h-20 top-0 flex justify-between items-center sticky shadow-lg bg-white z-[1001]'>
-      <div className='ml-6 h-20 sm:ml-10 md:ml-20 flex items-center'>
+      <div className='ml-0 h-20 sm:ml-10 md:ml-20 flex items-center'>
         {/* <h1 data-testid='logo' className='font-bold text-2xl ml-32'>Food Villa</h1> */}
         <Link to='/'>
-          <img className='h-20' src={logo} alt="Logo" />
+          <img className='h-32' src={zwigato} alt="Logo" />
         </Link>
         {/* <CiLocationOn className="font-bold text-2xl" /> */}
       </div>
@@ -152,7 +163,13 @@ const Header = () => {
             <div className={`fixed top-20 right-0 h-full w-3/4 bg-white shadow-lg overflow-y-auto z-[1000] transform transition-all duration-30000s`}>
               <ul className='py-6 space-y-4 text-lg cursor-pointer'>
                 <li className='px-4 py-2 border-b'>
-                  <Link to='/search' onClick={closeMenu}>Search</Link>
+                  <span>
+                    {(value == null) ? (
+                      <span onClick={handleClick} >Login</span>
+                    ) : (
+                      <span onClick={Logout}>Logout</span>
+                    )}
+                  </span>
                 </li>
                 <li className='px-4 py-2 border-b'>
                   <Link to='/offers' onClick={closeMenu}>Offers</Link>
