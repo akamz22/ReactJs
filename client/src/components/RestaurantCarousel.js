@@ -28,6 +28,7 @@ const RestaurantCarousel = (restaurants) => {
   return (
     <>
     <h2 className='font-bold text-2xl pb-4'>Top restaurant chains in Bangalore</h2>
+        {/* {console.log("Res",restaurants)} */}
       <Carousel responsive={responsive}>
         {restaurants.data.map((data) => (
           <div key={data.info.id} className='pr-8'>

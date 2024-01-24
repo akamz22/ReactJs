@@ -30,76 +30,76 @@ const Body = () => {
   }
 
 
-  async function getRestaurantMore() {
-    try {
-      const response = await fetch(
-        'https://corsproxy.io/?https://www.swiggy.com/dapi/restaurants/list/update',
-        {
-          method: 'POST', // Use POST for fetching more restaurants
-          headers: {
-            'Content-Type': 'application/json',
-            // Add any additional headers here
-          },
-          body: JSON.stringify({
-            lat: 12.9715987,
-            lng: 77.5945627,
-            nextOffset: 'COVCELQ4KID4ruup+9+KczCnEzgD', // Use the correct nextOffset value
-            // Other payload parameters if needed
-            seoParams: {
-              apiName: "FoodHomePage",
-              pageType: "FOOD_HOMEPAGE",
-              seoUrl: "https://www.swiggy.com/",
-            },
-            widgetOffset: {
-              // Include your widgetOffset values here
-              NewListingView_Topical_Fullbleed: '',
-              NewListingView_category_bar_chicletranking_TwoRows: '',
-              NewListingView_category_bar_chicletranking_TwoRows_Rendition: "",
-              collectionV5RestaurantListWidget_SimRestoRelevance_food_seo: String(page),
-            },
-          }),
-        }
-      );
-      const data = await response.json();
-      //    console.log(data.data.cards[0].card.card.gridElements.infoWithStyle.restaurants);
-      if (allRestaurants) {
+  // async function getRestaurantMore() {
+  //   try {
+  //     const response = await fetch(
+  //       'https://cors-proxy.htmldriven.com/?url=https://www.swiggy.com/dapi/restaurants/list/update',
+  //       {
+  //         method: 'POST', // Use POST for fetching more restaurants
+  //         headers: {
+  //           'Content-Type': 'application/json',
+  //           // Add any additional headers here
+  //         },
+  //         body: JSON.stringify({
+  //           lat: 12.9715987,
+  //           lng: 77.5945627,
+  //           nextOffset: 'COVCELQ4KID4ruup+9+KczCnEzgD', // Use the correct nextOffset value
+  //           // Other payload parameters if needed
+  //           seoParams: {
+  //             apiName: "FoodHomePage",
+  //             pageType: "FOOD_HOMEPAGE",
+  //             seoUrl: "https://www.swiggy.com/",
+  //           },
+  //           widgetOffset: {
+  //             // Include your widgetOffset values here
+  //             NewListingView_Topical_Fullbleed: '',
+  //             NewListingView_category_bar_chicletranking_TwoRows: '',
+  //             NewListingView_category_bar_chicletranking_TwoRows_Rendition: "",
+  //             collectionV5RestaurantListWidget_SimRestoRelevance_food_seo: String(page),
+  //           },
+  //         }),
+  //       }
+  //     );
+  //     const data = await response.json();
+  //     //    console.log(data.data.cards[0].card.card.gridElements.infoWithStyle.restaurants);
+  //     if (allRestaurants) {
 
-        let newRestaurants = data.data.cards[0].card.card.gridElements.infoWithStyle.restaurants;
+  //       let newRestaurants = data.data.cards[0].card.card.gridElements.infoWithStyle.restaurants;
 
-        setFilteredRestaurants((prevRestaurants) => [...prevRestaurants, ...newRestaurants]);
-        setAllRestaurants((prevRestaurants) => [...prevRestaurants, ...newRestaurants]);
-      }
-    } catch (error) {
-      console.error('Error fetching restaurants:', error);
-    }
-  }
+  //       setFilteredRestaurants((prevRestaurants) => [...prevRestaurants, ...newRestaurants]);
+  //       setAllRestaurants((prevRestaurants) => [...prevRestaurants, ...newRestaurants]);
+  //     }
+  //   } catch (error) {
+  //     console.error('Error fetching restaurants:', error);
+  //   }
+  // }
 
 
-  useEffect(() => {
-    if (page > 2) {
-      getRestaurantMore();
-    }
-  }, [page]);
-  const handleLoadMoreClick = () => {
-    // Increment the page state to load more restaurants
-    setPage((prevPage) => prevPage + 1);
-  };
+  // useEffect(() => {
+  //   if (page > 2) {
+  //     getRestaurantMore();
+  //   }
+  // }, [page]);
+  // const handleLoadMoreClick = () => {
+  //   // Increment the page state to load more restaurants
+  //   setPage((prevPage) => prevPage + 1);
+  // };
 
-  const handelInfiniteScroll = async () => {
-    try {
-      if (
-        window.innerHeight + document.documentElement.scrollTop + 1 >=
-        document.documentElement.scrollHeight
-      ) {
-        setPage((prev) => prev + 20);
-      }
-    } catch (error) { }
-  };
+  // const handelInfiniteScroll = async () => {
+  //   try {
+  //     if (
+  //       window.innerHeight + document.documentElement.scrollTop + 1 >=
+  //       document.documentElement.scrollHeight
+  //     ) {
+  //       setPage((prev) => prev + 20);
+  //     }
+  //   } catch (error) { }
+  // };
 
-  useEffect(() => {
-    window.addEventListener("scroll", handelInfiniteScroll);
-    return () => window.removeEventListener("scroll", handelInfiniteScroll);
-  }, []);
+  // useEffect(() => {
+  //   window.addEventListener("scroll", handelInfiniteScroll);
+  //   return () => window.removeEventListener("scroll", handelInfiniteScroll);
+  // }, []);
 
 
   const isOnline = useOnline();
@@ -165,6 +165,7 @@ const Body = () => {
       </div>
         <div className="grid grid-cols-1 mx-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 items-start gap-8 mt-8" data-testid='res-list'>
           {/* You have to write logic for NO restraunt fount here */}
+          {console.log("FL",filteredRestaurants)}
           {filteredRestaurants && filteredRestaurants.map((restaurant) => {
             return (
               <Link
@@ -178,14 +179,14 @@ const Body = () => {
           })}
         </div>
       </div>
-      <div className="flex justify-center my-4">
+      {/* <div className="flex justify-center my-4">
         <button
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
           onClick={handleLoadMoreClick}
         >
           Load More
         </button>
-      </div>
+      </div> */}
     </>
   )
 }

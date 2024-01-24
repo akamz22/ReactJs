@@ -16,7 +16,7 @@ const Cart = () => {
   }
 
   const handleCheckoutClick = () => {
-    fetch('http://localhost:3000/create-checkout-session', {
+    fetch('https://cors-proxy.htmldriven.com/?url=https://zwigato-food-3jmh.onrender.com/create-checkout-session', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
