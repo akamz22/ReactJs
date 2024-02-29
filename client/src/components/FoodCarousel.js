@@ -46,10 +46,10 @@ const FoodCarousel = (carousel) => {
       {carousel.data && carousel.data.info ? (
         <Carousel responsive={responsive}>
           {carousel.data.info.map((data) => (
-            <div key={data.id} className='px-2 cursor-pointer'>
+            <div key={data.id} className='pr-6 cursor-pointer'>
               <img
                 src={IMG_CDN_URL + data.imageId}
-                className="object-cover rounded-3xl"
+                className="object-cover h-32"
                 alt={`Image ${data.id}`}
               />
             </div>

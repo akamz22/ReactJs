@@ -33,7 +33,7 @@ const Body = () => {
   // async function getRestaurantMore() {
   //   try {
   //     const response = await fetch(
-  //       'https://cors-proxy.htmldriven.com/?url=https://www.swiggy.com/dapi/restaurants/list/update',
+  //       'https://www.swiggy.com/dapi/restaurants/list/update',
   //       {
   //         method: 'POST', // Use POST for fetching more restaurants
   //         headers: {
@@ -126,11 +126,11 @@ const Body = () => {
           />
         </div>
       </div> */}
-      <div className='mx-8 sm:mx-14 md:mx-24 lg:mx-44 pb-4'>
+      {/* <div className='mx-8 sm:mx-14 md:mx-24 lg:mx-44 pb-4'>
         {
           <FoodCarousel data={carousel} />
         }
-      </div>
+      </div> */}
 
       <div className='mx-8 sm:mx-14 md:mx-24 lg:mx-44 pb-4'>
         <ItemCarousel data={itemCarousel} />

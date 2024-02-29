@@ -16,10 +16,11 @@ const Cart = () => {
   }
 
   const handleCheckoutClick = () => {
-    fetch('https://cors-proxy.htmldriven.com/?url=https://zwigato-food-3jmh.onrender.com/create-checkout-session', {
+    fetch('https://proxy.cors.sh/https://zwigato-food-3jmh.onrender.com/create-checkout-session', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        'x-cors-api-key': 'temp_31ab79b6de87edce8c7a77dcc5a8272d'
       },
       body: JSON.stringify({
         cartItems

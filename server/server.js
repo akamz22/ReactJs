@@ -3,12 +3,12 @@ require('dotenv').config()
 
 const express = require('express')
 const app = express()
-const PORT  = process.env.PORT || 3000;
+const PORT  = process.env.PORT || 3003;
 const cors = require('cors')
 app.use(express.json())
 app.use(
     cors({
-        origin: 'https://zwigato-food.netlify.app/',
+        origin: '*',
     })
 )
 const stripe = require('stripe')(process.env.STRIPE_PRIVATE_KEY)
@@ -39,5 +39,5 @@ app.post('/create-checkout-session', async (req, res) => {
 })
 
 app.listen(PORT, () => {
-    console.log("App is listening on port 3000");
+    console.log("App is listening on port",PORT);
 })
